@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <template id="custom_field_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[1]/div[2]/div[6]" position="after">
+                <div t-if="doc.payment_term_id" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Términos de pago:</strong>
+                    <p class="m-0" t-field="doc.payment_term_id"/>
+                </div>
+                <div t-if="doc.pay_state" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Forma de cobro:</strong>
+                    <p class="m-0" t-field="doc.pay_state"/>
+                </div>
+                <div t-if="doc.delivery_type" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Tipo de Entrega:</strong>
+                    <p class="m-0" t-field="doc.delivery_type"/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

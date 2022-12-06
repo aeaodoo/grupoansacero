@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="custom_res_partner_form_view">
+      <field name="name">res partner form view</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <field name="vat" position="after">
+          <field name="How_do_you_know_us" />
+          <field name="code_plus" />
+        </field>
+        <field name="category_id" position="after">
+          <field name="purchasing_manager" />
+        </field>
+        <!--<field name="l10n_mx_edi_colony" position="replace">
+          <field name="l10n_mx_edi_colony" domain="[('state_id', '=', state_id)]"/>
+        </field>-->
+      </field>
+    </record>
+  </data>
+</odoo>

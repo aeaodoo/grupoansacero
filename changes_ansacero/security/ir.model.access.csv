@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_changes_colony_catalogues,colony.catalogues,model_colony_catalogues,base.group_user,1,1,1,1
