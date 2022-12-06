@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+        <!--TREE VIEW-->
+        <record model="ir.ui.view" id="colony_catalogues_tree_view">
+            <field name="name">Colony catalogues tree view</field>
+            <field name="model">colony.catalogues</field>
+            <field name="arch" type="xml">
+                <tree string="Colony catalogues">
+                    <field name="name"/>
+                    <field name="zip"/>
+                    <field name="city_id"/>
+                    <field name="state_id"/>
+                    <field name="country_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--FORM VIEW-->
+        <record model="ir.ui.view" id="colony_catalogues_form_view">
+            <field name="name">Colony catalogues form view</field>
+            <field name="model">colony.catalogues</field>
+            <field name="arch" type="xml">
+                <form string="Colony catalogues">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="zip"/>
+                                <field name="city_id"/>
+                            </group>
+                            <group>
+                                <field name="state_id"/>
+                                <field name="country_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Action-->
+        <record id="action_colony_catalogues" model="ir.actions.act_window">
+            <field name="name">Colony catalogues</field>
+            <field name="res_model">colony.catalogues</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="colony_catalogues_tree_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Generate Colony Catalogues
+                </p>
+            </field>
+        </record>
+
+        <!--Menú-->
+        <menuitem id="menu_colony_catalogues"
+            name="Colony"
+            parent="contacts.menu_localisation"
+            action="action_colony_catalogues"
+            sequence="4"/>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="custom_product_template_form_view">
+      <field name="name">product template form view</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_only_form_view"/>
+      <field name="arch" type="xml">
+        <field name="barcode" position="after">
+          <field name="line" />
+          <field name="product_level" />
+        </field>
+        <group name="operations" position="inside">
+          <field name="physical_Inventory" />
+        </group>
+      </field>
+    </record>
+  </data>
+</odoo>

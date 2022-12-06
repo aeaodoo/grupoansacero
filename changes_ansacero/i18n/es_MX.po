@@ -1,0 +1,266 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* changes_ansacero
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-07 02:26+0000\n"
+"PO-Revision-Date: 2022-09-07 02:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__res_partner__How_do_you_know_us__búsqueda_en_linea
+msgid "Búsqueda en Linea"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__zip
+msgid "C.P."
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_sale_order__delivery_cp
+msgid "CP de Entrega"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__sale_order__pay_state__credit
+msgid "CREDITO"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_partner__code_plus
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_users__code_plus
+msgid "Code plus"
+msgstr "Código plus"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,help:changes_ansacero.field_fleet_vehicle__unique_identifier
+msgid "Code to identify the vehicles"
+msgstr "Codigo para identificar los vehículos"
+
+#. module: changes_ansacero
+#: model:ir.ui.menu,name:changes_ansacero.menu_colony_catalogues
+msgid "Colony"
+msgstr "Colonia"
+
+#. module: changes_ansacero
+#: model:ir.actions.act_window,name:changes_ansacero.action_colony_catalogues
+#: model_terms:ir.ui.view,arch_db:changes_ansacero.colony_catalogues_form_view
+#: model_terms:ir.ui.view,arch_db:changes_ansacero.colony_catalogues_tree_view
+msgid "Colony catalogues"
+msgstr "Catálogos de colonias"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__name
+msgid "Colony name"
+msgstr "Nombre de colonia"
+
+#. module: changes_ansacero
+#: model:ir.model,name:changes_ansacero.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_fleet_vehicle__employee_id
+msgid "Conductor"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model,name:changes_ansacero.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__country_id
+msgid "Country"
+msgstr "País"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__sale_order__pay_state__pending
+msgid "DIRECTO EN CAJA"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__sale_order__pay_state__pay
+msgid "DOMICILIO DE CLIENTE"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,help:changes_ansacero.field_fleet_vehicle__employee_id
+msgid "Dirección del conductor del vehículo"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__sale_order__delivery_type__home
+msgid "ENTREGA A DOMICILIO"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__sale_order__delivery_type__pos
+msgid "ENTREGA EN PUNTO DE VENTA"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_sale_order__pay_state
+msgid "Forma de cobro"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_fleet_vehicle__gps_imei
+msgid "GPS (IMEI)"
+msgstr ""
+
+#. module: changes_ansacero
+#: model_terms:ir.actions.act_window,help:changes_ansacero.action_colony_catalogues
+msgid "Generate Colony Catalogues"
+msgstr "Generar catálogos de colonias"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_partner__How_do_you_know_us
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_users__How_do_you_know_us
+msgid "How do you know us?"
+msgstr "¿Cómo nos conoce?"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__id
+msgid "ID"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__write_date
+msgid "Last Updated on"
+msgstr "Actualizado el"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_product_product__line
+#: model:ir.model.fields,field_description:changes_ansacero.field_product_template__line
+msgid "Line"
+msgstr "Línea"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_company__l10n_mx_edi_colony
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_partner__l10n_mx_edi_colony
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_users__l10n_mx_edi_colony
+msgid "Nombre de Colonia"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__res_partner__How_do_you_know_us__pasó_por_una_sucursal
+msgid "Pasó por una Sucursal"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_product_product__physical_Inventory
+#: model:ir.model.fields,field_description:changes_ansacero.field_product_template__physical_Inventory
+msgid "Physical Inventory "
+msgstr "Inventario físico"
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__res_partner__How_do_you_know_us__por_un_espectacular
+msgid "Por un espectacular"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model,name:changes_ansacero.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_product_product__product_level
+#: model:ir.model.fields,field_description:changes_ansacero.field_product_template__product_level
+msgid "Product level"
+msgstr "Nivel de producto"
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__res_partner__How_do_you_know_us__publicidad_de_camionetas
+msgid "Publicidad de Camionetas"
+msgstr "Nivel de producto"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_partner__purchasing_manager
+#: model:ir.model.fields,field_description:changes_ansacero.field_res_users__purchasing_manager
+msgid "Purchasing manager"
+msgstr "Responsable de compras"
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__res_partner__How_do_you_know_us__recomendación_de_familiar_ó_amigo
+msgid "Recomendación de familiar ó amigo"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields.selection,name:changes_ansacero.selection__res_partner__How_do_you_know_us__redes_sociales
+msgid "Redes Sociales"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_fleet_vehicle__sim
+msgid "SIM"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model,name:changes_ansacero.model_sale_order
+msgid "Sales Order"
+msgstr "Orden de venta"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__state_id
+msgid "State"
+msgstr "Estado"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_sale_order__delivery_type
+msgid "Tipo de Entrega"
+msgstr ""
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_fleet_vehicle__unique_identifier
+msgid "Unique identifier"
+msgstr "Identificador único"
+
+#. module: changes_ansacero
+#: model:ir.model,name:changes_ansacero.model_fleet_vehicle
+msgid "Vehicle"
+msgstr "Vehículo"
+
+#. module: changes_ansacero
+#: model:ir.model.fields,field_description:changes_ansacero.field_colony_catalogues__city_id
+msgid "city"
+msgstr "Ciudad"
+
+#. module: changes_ansacero
+#: model:ir.model,name:changes_ansacero.model_colony_catalogues
+msgid "colony.catalogues"
+msgstr ""

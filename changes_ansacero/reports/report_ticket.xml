@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="sale_order_ticket_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <!-- <t t-call="web.external_layout"> -->
+                        <div class="page">
+                            <style>
+                                .section{border:1px solid; border-style: dashed; border-bottom: #000;}
+                                .span-right{float: right; margin-right: 50px;}
+                                .span-left{margin-left: 50px;}
+                                #numbers td{padding: 5px;}
+                                }
+                            </style>
+                            <div class="col-6">
+                                <div style="text-align: center; font-size: 8 pt; border-bottom-style: dashed; border-bottom-width: 2px;">
+                                    <span t-if="doc.company_id and doc.company_id.parent_id">
+                                        <span t-field="doc.company_id.parent_id.name"/>
+                                    </span>
+                                    <span t-if="doc.company_id and not doc.company_id.parent_id">
+                                        <span t-field="doc.company_id.name"/>
+                                    </span>
+                                    <span t-if="not doc.company_id">
+                                        <span>ANSACERO COMERCIALIZADORA SA DE CV</span>
+                                        <br/>
+                                    </span>
+                                    <br></br>
+                                    <span style="font-size: 6 pt;">Con la fuerza del Acero</span>
+                                </div>
+                                <div class="row" style="font-size: 7 pt;">
+                                    <div class="section"></div>
+                                    <div class="" style="border-bottom-style: dashed; border-bottom-width: 2px;">
+                                        <!-- <span>Cliente: </span><br/> -->
+                                        <!-- RFC: <span t-raw="'%s &lt;br&gt;' % o.partner_id.parent_id.vat_split if o.partner_id.parent_id else o.partner_id.vat_split"/><br/> -->
+                                        <span>Nombre:</span>
+                                        <span t-raw="'%s &lt;br&gt;' % (doc.partner_id.parent_id.name if doc.partner_id.parent_id else doc.partner_id.name)"/>
+                                        <span>Teléfono:</span>
+                                        <span t-raw="'%s &lt;br&gt;' % (doc.partner_id.parent_id.phone or '' if doc.partner_id.parent_id else doc.partner_id.phone or '')"/>
+                                        <span>Correo:</span>
+                                        <span t-raw="'%s &lt;br&gt;' % (doc.partner_id.parent_id.email or '' if doc.partner_id.parent_id else doc.partner_id.email or '')"/>
+                                        <span>
+                                            <b>Domicilio:</b>
+                                        </span>
+                                        <span t-if="doc.partner_id.parent_id">
+                                            <span t-field="doc.partner_id.parent_id.street_name"/>
+                                        </span>
+                                        <span t-if="not doc.partner_id.parent_id">
+                                            <span t-field="doc.partner_id.street_name"/>
+                                        </span>
+                                        <span t-raw="'%s' % (doc.partner_id.parent_id.street_number or '' if doc.partner_id.parent_id else doc.partner_id.street_number or '')"/>
+                                        <span t-raw="'%s' % (doc.partner_id.parent_id.street_number2 or '' if doc.partner_id.parent_id else doc.partner_id.street_number2 or '')"/>
+                                        <span t-raw="'%s' % (doc.partner_id.parent_id.city or '' if doc.partner_id.parent_id else doc.partner_id.city or '')"/>
+                                        <span t-raw="'%s' % (doc.partner_id.parent_id.l10n_mx_edi_colony or '' if doc.partner_id.parent_id else doc.partner_id.l10n_mx_edi_colony or '')"/>
+                                        <span t-raw="'%s' % (doc.partner_id.parent_id.l10n_mx_edi_locality or '' if doc.partner_id.parent_id else doc.partner_id.l10n_mx_edi_locality or '')"/>
+                                        <t t-if="doc.partner_id.parent_id.zip or doc.partner_id.zip">
+                                            <span>CP</span>
+                                            <span t-raw="'%s' % (doc.partner_id.parent_id.zip if doc.partner_id.parent_id else doc.partner_id.zip)"/>
+                                        </t>
+                                        <span t-raw="'%s' % (doc.partner_id.parent_id.state_id.name or '' if doc.partner_id.parent_id else doc.partner_id.state_id.name or '')"/>
+                                        <span t-raw="'%s' % (doc.partner_id.parent_id.country_id.name or '' if doc.partner_id.parent_id else doc.partner_id.country_id.name or '')"/>
+                                        <br/>
+                                    </div>
+                                    <div class="" style="font-size: 7 pt;">
+                                        <div class="">
+                                            <span>
+                                                <b>Cotización nº:</b>
+                                            </span>
+                                            <b>
+                                                <span style="float: right" t-field="doc.name"/>
+                                            </b>
+                                            <br/>
+                                            <span>Vigencia de cotización:</span>
+                                            <span style="float: right" t-field="doc.validity_date"/>
+                                            <br/>
+                                            <span>Fecha Emisión:</span>
+                                            <span style="float: right" t-field="doc.create_date"/>
+                                            <br/>
+                                            <span>Atendido por:</span>
+                                            <span style="float: right" t-field="doc.user_id"/>
+                                            <br/>
+                                            <!-- <span>Método de pago: </span><span style="float: right" t-field="o.l10n_mx_edi_payment_method_id"/><br/> -->
+                                        </div>
+                                    </div>
+
+                                    <table class="table table-condensed" style="border-bottom-style: dashed; border-bottom-width: 2px;">
+                                        <thead>
+                                            <tr style="font-size: 7 pt;">
+                                                <td>
+                                                    <b>Cantidad</b>
+                                                </td>
+                                                <td class="text-center">
+                                                    <b>Clave</b>
+                                                </td>
+                                                <td>
+                                                    <b>Unidad</b>
+                                                </td>
+                                                <td style="width: 100px">
+                                                    <b>Descripción del producto</b>
+                                                </td>
+                                                <br/>
+                                                <td>
+                                                    <b>P.U.</b>
+                                                </td>
+                                                <!-- <td class="text-right"><b>P.U. | Desc.</b></td> -->
+                                                <td class="text-right">
+                                                    <b>Subtotal partida</b>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="doc.order_line" t-as="line" class="border-black">
+                                                <td style="font-size: 7 pt;">
+                                                    <span t-field="line.product_uom_qty"/>
+                                                </td>
+                                                <td style="font-size: 7 pt;">
+                                                    <span t-field="line.product_id.default_code"/>
+                                                </td>
+                                                <td style="font-size: 7 pt;">
+                                                    <span t-field="line.product_id.uom_id"/>
+                                                </td>
+                                                <td style="font-size: 7 pt;">
+                                                    <span t-field="line.product_id"/>
+                                                </td>
+                                                <td class="text-right" style="font-size: 7 pt;">
+                                                    <span t-esc="doc.company_id.currency_id.symbol"/>
+                                                    <span t-esc="line.price_unit"/>
+                                                    <!-- <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="line.price_unit"/> | <span t-esc="line.discount"/>% -->
+                                                </td>
+                                                <td class="text-right" style="font-size: 7 pt;">
+                                                    <span t-field="line.price_subtotal"
+                                                          t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="col-md-6">
+                                        <table id="numbers" style="font-size: 7 pt; width: 100%;">
+                                            <tr>
+                                                <td>
+                                                    <span>SubTotal</span>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="doc.amount_untaxed"
+                                                          t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span>I.V.A.</span>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="doc.amount_tax"
+                                                          t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                                                </td>
+                                            </tr>
+                                            <tr class="border-black">
+                                                <td>
+                                                    <span>
+                                                        <b>Total</b>
+                                                    </span>
+                                                </td>
+                                                <td class="text-right">
+                                                    <b>
+                                                        <span t-field="doc.amount_total"
+                                                              t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="font-size: 8 pt; text-transform: uppercase; margin-top: 20px">
+                                    <!-- <center><span t-esc="o.l10n_mx_edi_amount_to_text()"/></center> -->
+                                    <center>
+                                        <span t-esc="get_amount_to_text"/>
+                                    </center>
+                                </div>
+                                <div style="font-size: 8 pt; margin-top: 20px">
+                                    <center>Gracias por su preferencia!</center>
+                                </div>
+                                <br/>
+
+                                <t t-if="doc.note">
+                                    <div class="row" style="font-size: 7 pt;">
+                                        <br/>
+                                        <span>
+                                            <b>Nota:</b>
+                                        </span>
+                                        <span t-esc="doc.note"/>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
