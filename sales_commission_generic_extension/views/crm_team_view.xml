@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018
+@author Carlos A. Garcia
+-->
+<odoo>
+        <record model="ir.ui.view" id="sales_team_commission">
+            <field name="name">sales.team.commission</field>
+            <field name="model">crm.team</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form" />
+            <field name="type">form</field>
+            <field name="arch" type="xml" >
+                <field name="company_id" position="after">
+                    <field name="commission_id"/>
+                </field>
+            </field>
+        </record>  
+</odoo>

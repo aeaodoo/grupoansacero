@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018
+@author Carlos A. Garcia
+-->
+<odoo>
+        <record model="ir.ui.view" id="view_sales_config_inherit_esp">
+            <field name="name">view.sales.config.inherit.esp</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="sales_commission_generic.view_sales_config_inherit_bi" />
+            <field name="type">form</field>
+            <field name="arch" type="xml" >
+                <field name="commission_discount_account" position="attributes">
+                    <attribute name="domain">['|',('user_type_id', '=', 'Expenses'),('user_type_id', '=', 'Gastos')]</attribute>
+                </field>
+
+            </field>
+        </record> 
+
+</odoo>

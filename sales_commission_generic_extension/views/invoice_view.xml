@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018
+@author Carlos A. Garcia
+-->
+<odoo>
+<record id="account_invoice_form_comm_attr" model="ir.ui.view">
+    <field name="name">account.invoice.form.comm.attr</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="sale.account_invoice_form" />
+    <field name="arch" type="xml">		
+		<xpath expr="//field[@name='user_id']" position="attributes">
+            <attribute name="required">1</attribute>
+        </xpath>
+		<xpath expr="//field[@name='team_id']" position="attributes">
+            <attribute name="required">1</attribute>
+			<attribute name="attrs">{'readonly':[('state','not in',['draft'])]}</attribute>
+			<attribute name="domain">['|',('member_ids.id', '=', user_id),('user_id', '=', user_id)]</attribute>
+        </xpath>
+    </field>
+</record>
+
+</odoo>

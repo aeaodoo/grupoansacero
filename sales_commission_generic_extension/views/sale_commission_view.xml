@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018
+@author Carlos A. Garcia
+-->
+<odoo>     
+        <record model="ir.ui.view" id="sale_commission_form_inherit">
+            <field name="name">sale.commission.form.inherit</field>
+            <field name="model">sale.commission</field>
+            <field name="inherit_id" ref="sales_commission_generic.sale_commission_form_view" />
+            <field name="type">form</field>
+            <field name="arch" type="xml" >
+                <field name="user_ids" position="after">
+                    <field name="active"/>
+                </field>
+                <field name="comm_type" position="after">
+                    <field name="team_goal_commission" attrs="{'invisible': [('comm_type','!=','sales_team')], 'required': [('comm_type','==','sales_team')]}"/>
+                    <field name="team_id" attrs="{'invisible': [('comm_type','not in',('sales_team','mix'))], 'required': [('comm_type','==','sales_team')]}"/>
+                    <field name="team_current" attrs="{'invisible': [('comm_type','not in',('sales_team','mix'))]}"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="invoice_sale_commission_tree_inherit">
+            <field name="name">invoice.sale.commission.tree.inherit</field>
+            <field name="model">invoice.sale.commission</field>
+            <field name="inherit_id" ref="sales_commission_generic.invoice_sale_commission_tree_view" />
+            <field name="type">tree</field>
+            <field name="arch" type="xml" >
+                <field name="commission_amount" position="attributes">
+                    <attribute name="string">Valor de comisión</attribute>
+                </field>
+                <field name="type_name" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="partner_type" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="sub_categ_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>                
+                <field name="user_id" position="after">
+                    <field name="date"/>
+                </field>
+                <field name="commission_amount" position="before">
+                    <field name="period"/>
+                    <field name="approved" invisible="1"/>
+                </field>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-muted">approved == False</attribute>
+                    <attribute name="decoration-success">approved == True</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="invoice_sale_commission_search_inherit">
+            <field name="name">invoice.sale.commission.search.inherit</field>
+            <field name="model">invoice.sale.commission</field>
+            <field name="inherit_id" ref="sales_commission_generic.invoice_sale_commission_search" />
+            <field name="arch" type="xml" >
+                <!-- <filter name="group_by_ctype" position="after"> -->
+                <xpath expr="//search" position="inside">
+                    <filter name="group_by_commission" string="Comisión de Ventas" domain="[]" context="{'group_by':'commission_id'}"/>
+					<filter name="group_by_period" string="Período" domain="[]" context="{'group_by':'period'}"/>
+                <!-- </filter> -->
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
