@@ -46,6 +46,7 @@ class ResPartnerInfoImportWizard(models.TransientModel):
             if number_lines > row_size:
                 #Split file 
                 res = self.split_xlsx_or_csv(self.option, self.file, row_size)
+                print("Aquí todo bien= ", res)
                 warn_msg = _("El archivo contiene %s registros. \nSe crearon %s archivos con %s registros en cada archivo. \nEl CRON se encargará de procesar de forma automática.") % (
                                 number_lines,
                                 len(res),
@@ -86,8 +87,18 @@ class ResPartnerInfoImportWizard(models.TransientModel):
         encoding = "utf-8"
         datas = base64.encodebytes(f.getvalue().encode(encoding))
         attachment = self.env["ir.attachment"].create(
-            {"name": file_name, "res_model": "res.partner", "type": "csv", "datas": datas, "state": "processing"}
+            {
+                "name": file_name, 
+                "res_model": self._name, 
+                'res_id': self.id,
+                'mimetype': 'application/csv',
+                "type": "binary", 
+                "datas": datas, 
+                "state": "processing"
+            }
         )
+        
+        print("ID attachment= ", attachment)
         return attachment
     
 
@@ -142,12 +153,12 @@ class ResPartnerInfoImportWizard(models.TransientModel):
                     split_city_name = city_id_name.split(", ")
                     # print("Split city name= ", split_city_name)
                     #Buscar colonia 
-                    search_colony = self.env['colony.catalogues'].search_read([('name', '=', split_city_name[0]), ('zip','=', row[11])], ['name','zip','city_id','state_id','country_id'])
+                    search_colony = self.env['colony.catalogues'].search_read([('name', 'ilike', split_city_name[0]), ('zip','=', row[11])], ['name','zip','city_id','state_id','country_id'])
                 # print("Información de la colonia=", search_colony)
                 
                 ##########Buscar categoría
                 if row[13]:
-                    format_category_ids = ["{}".format(item) for item in row[13].split(',')]
+                    format_category_ids = ["{}".format(item) for item in row[13].split(', ')]
                     category_ids = self.env['res.partner.category'].search([('name', 'in', format_category_ids)]).ids
                 #print("Información de las categorías= ", category_ids)
                 
@@ -161,14 +172,14 @@ class ResPartnerInfoImportWizard(models.TransientModel):
                         'company_type': row[1],
                         'name': name,
                         'street_name': street_name if street_name else '',
-                        'street_number': row[5] if row[5] else '',
-                        'street_number2': row[6] if row[6] else '',
+                        'street_number': row[5] if row[5] != 'FALSE'else '',
+                        'street_number2': row[6] if row[6] != 'FALSE' else '',
                         'l10n_mx_edi_colony': search_colony[0]['id'] if search_colony else None,
                         'city_id': search_colony[0]['city_id'][0] if search_colony else None,
                         'state_id': search_colony[0]['state_id'][0] if search_colony else None,
                         'zip': row[11] if row[11] else '',
-                        'country_id': search_colony[0]['country_id'][0] if search_colony else None,
-                        'vat': "MX"+row[3] if row[3] != 'FALSE' else '',
+                        'country_id': search_colony[0]['country_id'][0] if search_colony else 156,
+                        'vat': row[3] if row[3] != 'FALSE' else 'XAXX010101000',#"MX"+row[3] if row[3] != 'FALSE' else '',
                         'How_do_you_know_us': row[14] if row[14] != 'Otro' and row[14] != 'FALSE' else None,
                         'code_plus': row[15] if row[15] != 'FALSE' else '',
                         'phone': row[16] if row[16] != 'FALSE' else '',
@@ -190,22 +201,22 @@ class ResPartnerInfoImportWizard(models.TransientModel):
                         'trust': row[34] if row[34] else None,
                         'credit_limit': float(row[36]),
                     }
-                    print("Crear partner= ", info_partner)
-                    # self.env['res.partner'].sudo().create(info_partner)
+                    #print("Crear partner= ", info_partner)
+                    self.env['res.partner'].sudo().create(info_partner)
                 else:
                     print("Actualizar partner= ", search_partner)
-                    search_partner.write({
+                    search_partner.sudo().write({
                         'company_type': row[1],
                         'name': name,
                         'street_name': street_name if street_name else '',
-                        'street_number': row[5] if row[5] else '',
-                        'street_number2': row[6] if row[6] else '',
+                        'street_number': row[5] if row[5] != 'FALSE'else '',
+                        'street_number2': row[6] if row[6] != 'FALSE' else '',
                         'l10n_mx_edi_colony': search_colony[0]['id'] if search_colony else None,
                         'city_id': search_colony[0]['city_id'][0] if search_colony else None,
                         'state_id': search_colony[0]['state_id'][0] if search_colony else None,
                         'zip': row[11] if row[11] else '',
-                        'country_id': search_colony[0]['country_id'][0] if search_colony else None,
-                        'vat': "MX"+row[3] if row[3] != 'FALSE' else '',
+                        'country_id': search_colony[0]['country_id'][0] if search_colony else 156,
+                        'vat': row[3] if row[3] != 'FALSE' else 'XAXX010101000',#"MX"+row[3] if row[3] != 'FALSE' else '',
                         'How_do_you_know_us': row[14] if row[14] != 'Otro' and row[14] != 'FALSE' else None,
                         'code_plus': row[15] if row[15] != 'FALSE' else '',
                         'phone': row[16] if row[16] != 'FALSE' else '',

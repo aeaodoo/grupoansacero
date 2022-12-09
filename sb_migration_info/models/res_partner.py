@@ -22,16 +22,17 @@ class PartnerTemplateInherit(models.Model):
     @api.model
     def import_partner_ckunk(self):
         #cron Job
-        allAttachment = self.env['ir.attachment'].search([('state', '=', 'processing'), ('type','=','csv')], order='id asc', limit=1)
+        allAttachment = self.env['ir.attachment'].search([('state', '=', 'processing'), ('mimetype','=','application/csv')], order='id asc', limit=1)
         _logger.info("Archivo a procesar por el CRON JOB= %s", allAttachment.name)
         
-        for attachment in allAttachment:
-            fields, data = utilities._read_csv_attachment(attachment.datas)
-            if data: 
-                self.update_seller_price_in_product(data)
-                _logger.info("CRON JOB Finalizado= %s", allAttachment.name)
-                self.unlink_attachment(allAttachment)
-                
+        if allAttachment:
+            for attachment in allAttachment:
+                fields, data = utilities._read_csv_attachment(attachment.datas)
+                if data: 
+                    self.update_seller_price_in_product(data)
+                    _logger.info("CRON JOB Finalizado= %s", allAttachment.name)
+                    self.unlink_attachment(allAttachment)
+                    
         return True
 
     def unlink_attachment(self, attachments):
@@ -58,12 +59,12 @@ class PartnerTemplateInherit(models.Model):
                     split_city_name = city_id_name.split(", ")
                     # print("Split city name= ", split_city_name)
                     #Buscar colonia 
-                    search_colony = self.env['colony.catalogues'].search_read([('name', '=', split_city_name[0]), ('zip','=', row[11])], ['name','zip','city_id','state_id','country_id'])
+                    search_colony = self.env['colony.catalogues'].search_read([('name', 'ilike', split_city_name[0]), ('zip','=', row[11])], ['name','zip','city_id','state_id','country_id'])
                 # print("Información de la colonia=", search_colony)
                 
                 ##########Buscar categoría
                 if row[13]:
-                    format_category_ids = ["{}".format(item) for item in row[13].split(',')]
+                    format_category_ids = ["{}".format(item) for item in row[13].split(', ')]
                     category_ids = self.env['res.partner.category'].search([('name', 'in', format_category_ids)]).ids
                 #print("Información de las categorías= ", category_ids)
                 
@@ -77,14 +78,14 @@ class PartnerTemplateInherit(models.Model):
                         'company_type': row[1],
                         'name': name,
                         'street_name': street_name if street_name else '',
-                        'street_number': row[5] if row[5] else '',
-                        'street_number2': row[6] if row[6] else '',
+                        'street_number': row[5] if row[5] != 'FALSE'else '',
+                        'street_number2': row[6] if row[6] != 'FALSE' else '',
                         'l10n_mx_edi_colony': search_colony[0]['id'] if search_colony else None,
                         'city_id': search_colony[0]['city_id'][0] if search_colony else None,
                         'state_id': search_colony[0]['state_id'][0] if search_colony else None,
-                        'zip': row[11] if row[11] else '',
-                        'country_id': search_colony[0]['country_id'][0] if search_colony else None,
-                        'vat': "MX"+row[3] if row[3] != 'FALSE' else '',
+                        'zip': row[11] if row[11] != 'FALSE' else '',
+                        'country_id': search_colony[0]['country_id'][0] if search_colony else 156,
+                        'vat': row[3] if row[3] != 'FALSE' else 'XAXX010101000',#"MX"+row[3] if row[3] != 'FALSE' else '',
                         'How_do_you_know_us': row[14] if row[14] != 'Otro' and row[14] != 'FALSE' else None,
                         'code_plus': row[15] if row[15] != 'FALSE' else '',
                         'phone': row[16] if row[16] != 'FALSE' else '',
@@ -96,7 +97,7 @@ class PartnerTemplateInherit(models.Model):
                         'customer_rank': 1 if row[22] == 'TRUE' else 0,
                         'supplier_rank': 1 if row[23] == 'TRUE' else 0,
                         'user_id': self.env['res.users'].search([('name', '=', row[25])]).id if row[25] else None,
-                        # 'team_id': self.env['crm.team'].search([('name', '=', row[25])]).id if row[25] else None, 
+                        'vat': "MX"+row[3] if row[3] != 'FALSE' else '',#"MX"+row[3] if row[3] != 'FALSE' else '', 
                         'property_payment_term_id': self.env['account.payment.term'].search([('name', '=', row[33])]).id if row[33] else None,
                         'property_product_pricelist': self.env['product.pricelist'].search([('name', '=', row[29])]).id if row[29] else None,
                         'property_account_position_id': self.env['account.fiscal.position'].search([('name', '=', row[39])]).id if row[39] else None,
@@ -107,21 +108,21 @@ class PartnerTemplateInherit(models.Model):
                         'credit_limit': float(row[36]),
                     }
                     print("Crear partner= ", info_partner)
-                    # self.env['res.partner'].sudo().create(info_partner)
+                    self.env['res.partner'].sudo().create(info_partner)
                 else:
-                    # print("Actualizar partner= ", search_partner)
-                    search_partner.write({
+                    print("Actualizar partner= ", search_partner)
+                    search_partner.sudo().write({
                         'company_type': row[1],
                         'name': name,
                         'street_name': street_name if street_name else '',
-                        'street_number': row[5] if row[5] else '',
-                        'street_number2': row[6] if row[6] else '',
+                        'street_number': row[5] if row[5] != 'FALSE'else '',
+                        'street_number2': row[6] if row[6] != 'FALSE' else '',
                         'l10n_mx_edi_colony': search_colony[0]['id'] if search_colony else None,
                         'city_id': search_colony[0]['city_id'][0] if search_colony else None,
                         'state_id': search_colony[0]['state_id'][0] if search_colony else None,
                         'zip': row[11] if row[11] else '',
-                        'country_id': search_colony[0]['country_id'][0] if search_colony else None,
-                        'vat': "MX"+row[3] if row[3] != 'FALSE' else '',
+                        'country_id': search_colony[0]['country_id'][0] if search_colony else 156,
+                        'vat': row[3] if row[3] != 'FALSE' else 'XAXX010101000',#"MX"+row[3] if row[3] != 'FALSE' else '',
                         'How_do_you_know_us': row[14] if row[14] != 'Otro' and row[14] != 'FALSE' else None,
                         'code_plus': row[15] if row[15] != 'FALSE' else '',
                         'phone': row[16] if row[16] != 'FALSE' else '',
