@@ -153,7 +153,7 @@ class ResPartnerInfoImportWizard(models.TransientModel):
                     split_city_name = city_id_name.split(", ")
                     # print("Split city name= ", split_city_name)
                     #Buscar colonia 
-                    search_colony = self.env['colony.catalogues'].search_read([('name', 'ilike', split_city_name[0]), ('zip','=', row[11])], ['name','zip','city_id','state_id','country_id'])
+                    search_colony = self.env['colony.catalogues'].search_read([('name', '=', split_city_name[0]), ('zip','=', row[11])], ['name','zip','city_id','state_id','country_id'])
                 # print("Información de la colonia=", search_colony)
                 
                 ##########Buscar categoría
@@ -175,8 +175,8 @@ class ResPartnerInfoImportWizard(models.TransientModel):
                         'street_number': row[5] if row[5] != 'FALSE'else '',
                         'street_number2': row[6] if row[6] != 'FALSE' else '',
                         'l10n_mx_edi_colony': search_colony[0]['id'] if search_colony else None,
-                        'city_id': search_colony[0]['city_id'][0] if search_colony else None,
-                        'state_id': search_colony[0]['state_id'][0] if search_colony else None,
+                        'city_id': search_colony[0]['city_id'][0] if search_colony and search_colony[0]['city_id'] else None,
+                        'state_id': search_colony[0]['state_id'][0] if search_colony and search_colony[0]['state_id'] else None,
                         'zip': row[11] if row[11] else '',
                         'country_id': search_colony[0]['country_id'][0] if search_colony else 156,
                         'vat': row[3] if row[3] != 'FALSE' else 'XAXX010101000',#"MX"+row[3] if row[3] != 'FALSE' else '',
@@ -212,8 +212,8 @@ class ResPartnerInfoImportWizard(models.TransientModel):
                         'street_number': row[5] if row[5] != 'FALSE'else '',
                         'street_number2': row[6] if row[6] != 'FALSE' else '',
                         'l10n_mx_edi_colony': search_colony[0]['id'] if search_colony else None,
-                        'city_id': search_colony[0]['city_id'][0] if search_colony else None,
-                        'state_id': search_colony[0]['state_id'][0] if search_colony else None,
+                        'city_id': search_colony[0]['city_id'][0] if search_colony and search_colony[0]['city_id'] else None,
+                        'state_id': search_colony[0]['state_id'][0] if search_colony and search_colony[0]['state_id'] else None,
                         'zip': row[11] if row[11] else '',
                         'country_id': search_colony[0]['country_id'][0] if search_colony else 156,
                         'vat': row[3] if row[3] != 'FALSE' else 'XAXX010101000',#"MX"+row[3] if row[3] != 'FALSE' else '',
