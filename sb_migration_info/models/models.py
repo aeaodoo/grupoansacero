@@ -201,10 +201,10 @@ class ResPartnerInfoImportWizard(models.TransientModel):
                         'trust': row[34] if row[34] else None,
                         'credit_limit': float(row[36]),
                     }
-                    #print("Crear partner= ", info_partner)
+                    _logger.info("Crear partner = %s", info_partner)
                     self.env['res.partner'].sudo().create(info_partner)
                 else:
-                    print("Actualizar partner= ", search_partner)
+                    _logger.info("Actualizar partner = %s", search_partner)
                     search_partner.sudo().write({
                         'company_type': row[1],
                         'name': name,

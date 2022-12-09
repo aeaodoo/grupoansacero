@@ -97,7 +97,6 @@ class PartnerTemplateInherit(models.Model):
                         'customer_rank': 1 if row[22] == 'TRUE' else 0,
                         'supplier_rank': 1 if row[23] == 'TRUE' else 0,
                         'user_id': self.env['res.users'].search([('name', '=', row[25])]).id if row[25] else None,
-                        'vat': "MX"+row[3] if row[3] != 'FALSE' else '',#"MX"+row[3] if row[3] != 'FALSE' else '', 
                         'property_payment_term_id': self.env['account.payment.term'].search([('name', '=', row[33])]).id if row[33] else None,
                         'property_product_pricelist': self.env['product.pricelist'].search([('name', '=', row[29])]).id if row[29] else None,
                         'property_account_position_id': self.env['account.fiscal.position'].search([('name', '=', row[39])]).id if row[39] else None,
@@ -107,10 +106,10 @@ class PartnerTemplateInherit(models.Model):
                         'trust': row[34] if row[34] else None,
                         'credit_limit': float(row[36]),
                     }
-                    print("Crear partner= ", info_partner)
+                    _logger.info("Crear partner = %s", info_partner)
                     self.env['res.partner'].sudo().create(info_partner)
                 else:
-                    print("Actualizar partner= ", search_partner)
+                    _logger.info("Actualizar partner = %s", search_partner)
                     search_partner.sudo().write({
                         'company_type': row[1],
                         'name': name,
