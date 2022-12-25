@@ -3,7 +3,9 @@
 # @author Carlos A. Garcia
 
 from odoo import api, fields, models, tools, _
-from datetime import datetime
+from odoo.fields import datetime
+from datetime import timedelta
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -98,7 +100,9 @@ class InvoiceSaleCommission(models.Model):
     @api.depends('date')
     def compute_period(self):
         for record in self:
-        	record.period = datetime.strptime(record.date,"%Y-%m-%d").strftime("%m/%Y")
+            print("Imprimiendo fecha de factura: ", record.date)
+            #record.period = datetime.strptime(record.date,"%Y-%m-%d").strftime("%m/%Y")
+            record.period = datetime.strptime(record.date.strftime("%m/%Y"), '%m/%Y')
 
     approved = fields.Boolean('Aprobada', store=False, compute='compute_state', default=False)
     #period = fields.Char(string='Período', store=True, default= datetime.today().strftime("%m/%Y")) # important declare the method first the 'default=' in field.
