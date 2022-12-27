@@ -103,6 +103,6 @@ class InvoiceSaleCommission(models.Model):
             #record.period = datetime.strptime(record.date,"%Y-%m-%d").strftime("%m/%Y")
             record.period = datetime.strptime(record.date.strftime("%m/%Y"), '%m/%Y')
 
-    approved = fields.Boolean('Aprobada', store=False, compute='compute_state', default=False)
+    approved = fields.Boolean('Aprobada', store=True, compute='compute_state', default=False)
     #period = fields.Char(string='Período', store=True, default= datetime.today().strftime("%m/%Y")) # important declare the method first the 'default=' in field.
     period = fields.Char(string='Período', store=True, compute='compute_period')
