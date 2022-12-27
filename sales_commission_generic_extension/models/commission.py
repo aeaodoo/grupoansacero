@@ -88,13 +88,13 @@ class InvoiceSaleCommission(models.Model):
 
     # @api.one
     def compute_state(self):
-        for obj in self:
-            if obj.invoice_id:
-                if obj.invoice_id.team_id.invoiced >= obj.invoice_id.team_id.invoiced_target:
-                    obj.approved = True
-            elif obj.order_id:
-                if obj.order_id.team_id.invoiced >= obj.order_id.team_id.invoiced_target:
-                    obj.approved = True
+        for record in self:
+            if record.invoice_id:
+                if record.invoice_id.team_id.invoiced >= record.invoice_id.team_id.invoiced_target:
+                    record.approved = True
+            elif record.order_id:
+                if record.order_id.team_id.invoiced >= record.order_id.team_id.invoiced_target:
+                    record.approved = True
 
     # @api.one
     @api.depends('date')
