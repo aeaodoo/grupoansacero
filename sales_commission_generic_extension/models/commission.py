@@ -100,7 +100,6 @@ class InvoiceSaleCommission(models.Model):
     @api.depends('date')
     def compute_period(self):
         for record in self:
-            print("Imprimiendo fecha de factura: ", record.date)
             #record.period = datetime.strptime(record.date,"%Y-%m-%d").strftime("%m/%Y")
             record.period = datetime.strptime(record.date.strftime("%m/%Y"), '%m/%Y')
 
