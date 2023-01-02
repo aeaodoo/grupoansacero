@@ -33,6 +33,7 @@
         'reports/report_cotizacion_orden.xml',
         "reports/template_ticket.xml",
         "reports/report_ticket.xml",
+        'views/stock_picking_view.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
