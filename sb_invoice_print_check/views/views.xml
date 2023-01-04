@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="sb_invoice_print_check.list">
+      <field name="name">sb_invoice_print_check list</field>
+      <field name="model">sb_invoice_print_check.sb_invoice_print_check</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="sb_invoice_print_check.action_window">
+      <field name="name">sb_invoice_print_check window</field>
+      <field name="res_model">sb_invoice_print_check.sb_invoice_print_check</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="sb_invoice_print_check.action_server">
+      <field name="name">sb_invoice_print_check server</field>
+      <field name="model_id" ref="model_sb_invoice_print_check_sb_invoice_print_check"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="sb_invoice_print_check" id="sb_invoice_print_check.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="sb_invoice_print_check.menu_1" parent="sb_invoice_print_check.menu_root"/>
+    <menuitem name="Menu 2" id="sb_invoice_print_check.menu_2" parent="sb_invoice_print_check.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="sb_invoice_print_check.menu_1_list" parent="sb_invoice_print_check.menu_1"
+              action="sb_invoice_print_check.action_window"/>
+    <menuitem name="Server to list" id="sb_invoice_print_check" parent="sb_invoice_print_check.menu_2"
+              action="sb_invoice_print_check.action_server"/>
+-->
+  </data>
+</odoo>
