@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+	<record id="form_sale_dev_weight_inherited" model="ir.ui.view">
+		<field name="name">form.sale.weight.inherited</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+            <!--order line tree-->
+			<xpath expr="//page//field[@name='order_line']//tree//field[@name='price_unit']" position="before">
+                <field name="product_weight_global"/>
+			</xpath>
+            <!--order line form-->
+            <xpath expr="//field[@name='order_line']//form//field[@name='price_unit']" position="before">
+                <field name="product_weight_global"/>
+            </xpath>
+            <!--in order-->
+            <xpath expr="//field[@name='note']" position="before">
+                <group string="Total Weight">
+                    <label for="total_product_weight_global"/>
+                    <div class="o_row">
+                        <field name="total_product_weight_global"/>
+                        <span>kg</span>
+                    </div>
+                </group>
+            </xpath>
+		</field>
+	</record>
+</odoo>

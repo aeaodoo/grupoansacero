@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+	<record id="form_picking_weight_inherited" model="ir.ui.view">
+		<field name="name">form.picking.weight.inherited</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+            <!--tree-->
+			<xpath expr="//field[@name='move_ids_without_package']//tree//field[@name='product_uom_qty']" position="after">
+                <field name="product_weight_global"/>
+			</xpath>
+            <!--in order-->
+            <xpath expr="//notebook" position="after">
+                <group string="Total Weight">
+                    <label for="total_product_weight_global"/>
+                    <div class="o_row">
+                        <field name="total_product_weight_global"/>
+                        <span>kg</span>
+                    </div>
+                </group>
+            </xpath>
+		</field>
+	</record>
+</odoo>
